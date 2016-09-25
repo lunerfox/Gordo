@@ -1,0 +1,125 @@
+===============
+Unity generated
+===============
+Temp/
+Library/
+
+=====================================
+Visual Studio / MonoDevelop generated
+=====================================
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
+
+============
+OS generated
+============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.blend1
+*.blend2
+*.blend1.meta
+*.blend2.meta
+NBAT Locomotion Demo/ProjectSettings/ProjectSettings.asset
+NBAT Locomotion Demo/Assets/main/Lightmap-0_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-0_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-0_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-1_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-1_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-1_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-1_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-2_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-2_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-2_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-2_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-3_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-3_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-3_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-3_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-4_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-4_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-4_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-4_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-5_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-5_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-5_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-5_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/LightingData.asset
+NBAT Locomotion Demo/Assets/main/LightingData.asset.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-0_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-6_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-6_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-6_comp_light.exr
+NBAT Locomotion Demo/Assets/Prefabs/Objects/Lights.meta
+NBAT Locomotion Demo/Assets/Prefabs/Objects/Lights/SO_Lamp_01.prefab
+NBAT Locomotion Demo/Assets/Prefabs/Objects/Lights/SO_Lamp_01.prefab.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-10_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-10_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-10_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-10_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-11_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-11_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-11_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-11_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-12_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-12_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-12_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-12_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-13_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-13_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-13_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-13_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-14_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-14_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-14_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-14_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-7_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-7_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-7_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-7_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-8_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-8_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-8_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-8_comp_light.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-9_comp_dir.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-9_comp_dir.exr.meta
+NBAT Locomotion Demo/Assets/main/Lightmap-9_comp_light.exr
+NBAT Locomotion Demo/Assets/main/Lightmap-9_comp_light.exr.meta
+Assets/PoliceStation/Lightmap-0_comp_light.exr.meta
+Assets/PoliceStation/Lightmap-1_comp_dir.exr.meta
+Assets/PoliceStation/Lightmap-1_comp_light.exr
+Assets/PoliceStation/Lightmap-1_comp_light.exr.meta
+Assets/PoliceStation/LightingData.asset
+Assets/PoliceStation/LightingData.asset.meta
+Assets/PoliceStation/Lightmap-0_comp_dir.exr
+Assets/PoliceStation/Lightmap-0_comp_dir.exr.meta
+Assets/PoliceStation/Lightmap-0_comp_light.exr
+Assets/PoliceStation/Lightmap-1_comp_dir.exr
+Assets/PoliceStation/ReflectionProbe-0.exr
+Assets/PoliceStation/ReflectionProbe-0.exr.meta
+Assets/Scene1/LightingData.asset
+Assets/Scene1/LightingData.asset.meta
+Assets/Scene1/ReflectionProbe-0.exr
+Assets/Scene1/ReflectionProbe-0.exr.meta
+Assets/PoliceStation/Lightmap-2_comp_dir.exr
+Assets/PoliceStation/Lightmap-2_comp_dir.exr.meta
+Assets/PoliceStation/Lightmap-2_comp_light.exr
+Assets/PoliceStation/Lightmap-2_comp_light.exr.meta
+Assets/PoliceStation/Lightmap-3_comp_dir.exr
+Assets/PoliceStation/Lightmap-3_comp_dir.exr.meta
+Assets/PoliceStation/Lightmap-3_comp_light.exr
+Assets/PoliceStation/Lightmap-3_comp_light.exr.meta
+Assets/Skybox/sincity_dn.tga.meta
