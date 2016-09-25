@@ -62,7 +62,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         horizontalAxisName = "Horizontal" + playerNum.ToString();
         verticalAxisName = "Vertical" + playerNum.ToString();
-        Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
+        //Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
     }
 
     public Vector3 getForceVector()
