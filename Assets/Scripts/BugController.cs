@@ -15,12 +15,14 @@ public class BugController : MonoBehaviour {
     public UnityEvent OnFallen;
     public UnityEvent OnDefeat;
 
-    public PlayerInputHandler input;
+    
 
     public float bugRollStrength = 4.0f;
     private float currentStrength;
     
     private Rigidbody rb;
+    private PlayerInputHandler input;
+
     private int GordoLevel = 0;
     private float collisionDisableTime = 0.15f;
     private float _collisionDisableTime = 0;
@@ -28,7 +30,11 @@ public class BugController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
-        if (!rb) Debug.LogError("Failed to find Rigid Body on Bug");
+        if (!rb) Debug.LogError("Failed to find Rigid Body on " + this.gameObject.name);
+
+        input = GetComponent<PlayerInputHandler>();
+        if (!input) Debug.LogError("Failed to find player input handler on " + this.gameObject.name);
+
         UpdateGordoLevel(0); //Sets up the parameters of the bug.
     }
 	

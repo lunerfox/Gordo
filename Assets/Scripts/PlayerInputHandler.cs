@@ -14,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public enum Players { player1, player2, player3, player4 };
     public Players player;
+    public AIManager AI;
 
     private string horizontalAxisName;
     private string verticalAxisName;
@@ -48,14 +49,32 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
             }
         }
+        else if (inputMethod == InputMethod.AI)
+        {
+            //This Player is AI controlled. Create an AI component
+            AI = this.gameObject.AddComponent<AIManager>();
+            AI.InitAI(10.0f);
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalAxis = CrossPlatformInputManager.GetAxis(horizontalAxisName);
-        verticalAxis = CrossPlatformInputManager.GetAxis(verticalAxisName);
+        switch(inputMethod)
+        {
+            case InputMethod.touchJoystick:
+                horizontalAxis = CrossPlatformInputManager.GetAxis(horizontalAxisName);
+                verticalAxis = CrossPlatformInputManager.GetAxis(verticalAxisName);
+                break;
+
+            case InputMethod.AI:
+                break;
+
+            default:
+                break;                
+        }
+        
     }
 
     void SetupTouchControls(int playerNum)
@@ -67,7 +86,19 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector3 getForceVector()
     {
-        return new Vector3(horizontalAxis, 0.0f, verticalAxis);
+        if(inputMethod == InputMethod.touchJoystick )
+        {
+            return new Vector3(horizontalAxis, 0.0f, verticalAxis);
+        }
+        else if(inputMethod == InputMethod.AI)
+        {
+            return AI.Calculate();
+        }
+        else
+        {
+            return new Vector3(0, 0.0f, 0);
+        }
+            
     }
 
 }
