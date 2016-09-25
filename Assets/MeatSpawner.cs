@@ -59,7 +59,7 @@ public class MeatSpawner : MonoBehaviour {
         float forceY = Random.Range(0, maxForce.y);
         float forceZ = Random.Range(-maxForce.z, maxForce.z);
         var launchForce = new Vector3(forceX, forceY, forceZ);
-        Debug.Log("Launch force is " + launchForce);
+        //Debug.Log("Launch force is " + launchForce);
         return launchForce;
     }
 }
