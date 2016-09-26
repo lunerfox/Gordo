@@ -140,5 +140,4 @@ public class BugController : MonoBehaviour {
         rb.drag = drag;
         //Debug.Log("Bug now has mass " + mass + ", strength " + strength + ", drag" + drag);
     }
-
 }

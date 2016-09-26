@@ -7,7 +7,8 @@ public class ParticleFXSpawner : MonoBehaviour {
 
     public bool parentToObject = false;
     public GameObject particlePrefab;
-	
+    public float timeToLive = 5.0f;
+
     public void FireFX()
     {
         var newFX = Instantiate(particlePrefab);
@@ -20,6 +21,8 @@ public class ParticleFXSpawner : MonoBehaviour {
         {
             newFX.transform.parent = null;
         }
+
+        Destroy(newFX, timeToLive);
     }
 
 }

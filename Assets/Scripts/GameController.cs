@@ -22,10 +22,12 @@ public class GameController : MonoBehaviour {
     //Allow some settling time before starting certain actions.
     private float timeBeforeStart = 0.10f;
     private SpawnPositionController spawner;
+    private BugController[] bugs;
 
     // Use this for initialization
     void Start () {
         spawner = FindObjectOfType<SpawnPositionController>();
+        bugs = FindObjectsOfType<BugController>();
     }
 	
 	// Update is called once per frame
@@ -75,6 +77,27 @@ public class GameController : MonoBehaviour {
     public void ResetGame()
     {
 
+    }
+
+    public void CheckForWinner()
+    {
+        int count = 0;
+        GameObject winningBug = null;
+        //Count the number of bugs that hasn't fallen. If only one hasn't, then they've won!
+        foreach (var bug in bugs)
+        {
+            if (!bug.isFallen)
+            {
+                count++;
+                winningBug = bug.gameObject;
+            }
+        }
+        
+        //One and only one bug must be left.
+        if(count == 1)
+        {
+            Debug.Log("Waaahoo! " + winningBug.name + " is the winner!");
+        }
     }
 
 }
