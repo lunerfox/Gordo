@@ -21,10 +21,11 @@ public class GameController : MonoBehaviour {
 
     //Allow some settling time before starting certain actions.
     private float timeBeforeStart = 0.10f;
+    private SpawnPositionController spawner;
 
     // Use this for initialization
     void Start () {
-        
+        spawner = FindObjectOfType<SpawnPositionController>();
     }
 	
 	// Update is called once per frame
@@ -58,6 +59,22 @@ public class GameController : MonoBehaviour {
     {
         currentSelectedLevel--;
         changeScene(currentSelectedLevel);
+    }
+
+    public void StartGame()
+    {
+
+        isGameStarted = true;
+    }
+
+    public void EndGame()
+    {
+        isGameStarted = false;
+    }
+
+    public void ResetGame()
+    {
+
     }
 
 }

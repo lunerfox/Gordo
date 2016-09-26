@@ -15,11 +15,11 @@ public class BugController : MonoBehaviour {
     public UnityEvent OnFallen;
     public UnityEvent OnDefeat;
 
-    
-
     public float bugRollStrength = 4.0f;
     private float currentStrength;
-    
+
+    public bool isFallen = false;
+
     private Rigidbody rb;
     private PlayerInputHandler input;
 
@@ -58,6 +58,7 @@ public class BugController : MonoBehaviour {
             UpdateGordoLevel(1);
             Destroy(other.gameObject);
         }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -74,6 +75,13 @@ public class BugController : MonoBehaviour {
             //Swap momentum between the two bugs.
             this.ResolveVelocity(otherMu);
             otherBug.ResolveVelocity(thisMu);
+        }
+        else if(collision.gameObject.CompareTag("Destroyer"))
+        {
+            Debug.Log("Bug " + this.gameObject.name + " has fallen!");
+            OnFallen.Invoke();
+            isFallen = true;
+            Destroy(this.gameObject, 3.0f);
         }
     }
 
