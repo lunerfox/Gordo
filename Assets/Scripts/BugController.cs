@@ -66,7 +66,7 @@ public class BugController : MonoBehaviour {
         {
             OnCollision.Invoke();
             var otherBug = collision.gameObject.GetComponent<BugController>();
-            Debug.Log(this.gameObject.name + " has collided with " + collision.gameObject.name);
+            //Debug.Log(this.gameObject.name + " has collided with " + collision.gameObject.name);
 
             //Get the momentum of the two bugs
             Vector3 thisMu = this.CalculateMomentum();
@@ -80,14 +80,14 @@ public class BugController : MonoBehaviour {
     Vector3 CalculateMomentum()
     {
         var momentum = rb.velocity * rb.mass;
-        Debug.Log("Current Momentum of " + this.gameObject.name +  " is " + momentum);
+        //Debug.Log("Current Momentum of " + this.gameObject.name +  " is " + momentum);
         return momentum;
     }
 
     void ResolveVelocity(Vector3 momentum)
     {
         rb.velocity = (momentum / rb.mass)*1.5f;
-        Debug.Log("New Velocity of " + this.gameObject.name + " is " + rb.velocity);
+        //Debug.Log("New Velocity of " + this.gameObject.name + " is " + rb.velocity);
         //Disable collisions for some time. This will prevent the bugs swapping momentum twice.
         _collisionDisableTime = collisionDisableTime;
     }
