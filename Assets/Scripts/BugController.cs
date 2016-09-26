@@ -13,7 +13,7 @@ public class BugController : MonoBehaviour {
     public UnityEvent OnFeeding;
     public UnityEvent OnCollision;
     public UnityEvent OnGordoModeStart;
-    public UnityEvent OnGordoModeEnd; 
+    public UnityEvent OnGordoModeEnd;
     public UnityEvent OnFallen;
     public UnityEvent OnDefeat;
 
@@ -34,8 +34,8 @@ public class BugController : MonoBehaviour {
 
     private GameController game;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
 
         game = FindObjectOfType<GameController>();
 
@@ -46,23 +46,12 @@ public class BugController : MonoBehaviour {
         if (!input) Debug.LogError("Failed to find player input handler on " + this.gameObject.name);
 
         //If no name is given to the player, then give them a random name.
-        if(playerFriendlyName == "")
-        {
-            if (input.inputMethod == 1)
-            {
-                playerFriendlyName = Utils.getRandomName();
-            }
-            else
-            {
-                //Just for this build, we'll specify a very special player name.
-                playerFriendlyName = "codeSpark employee #" + Random.Range(1, 999).ToString();
-            }
-        }
-            
-
+        nameBugs();
         UpdateGordoLevel(0); //Sets up the parameters of the bug.
     }
-	
+
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -115,6 +104,8 @@ public class BugController : MonoBehaviour {
         {
             Debug.Log("Bug " + this.gameObject.name + " has fallen!");
             isFallen = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             OnFallen.Invoke();
             this.gameObject.SetActive(false);
         }
@@ -181,12 +172,24 @@ public class BugController : MonoBehaviour {
     public void ResetBug()
     {
         isFallen = false;
-        //UpdateGordoLevel(-4);
     }
 
     public void updateInputMode()
     {
         input.toggleMode(game);
+    }
+
+    void nameBugs()
+    {
+        if (input.inputMethod == 1)
+        {
+            playerFriendlyName = Utils.getRandomName();
+        }
+        else
+        {
+            //Just for this build, we'll specify a very special player name.
+            playerFriendlyName = "codeSpark employee #" + Random.Range(1, 999).ToString();
+        }
     }
 
 }

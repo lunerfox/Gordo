@@ -83,12 +83,6 @@ public class GameController : MonoBehaviour {
         bugs = FindObjectsOfType<BugController>();
     }
 
-    public void EndGame()
-    {
-        isGameStarted = false;
-        OnEndGame.Invoke();
-    }
-
     public void ResetGame()
     {
         OnResetGame.Invoke();
@@ -140,6 +134,7 @@ public class GameController : MonoBehaviour {
         {
             winningPlayer = winningBug.playerFriendlyName;
             Debug.Log("Waaahoo! " + winningPlayer + " is the winner!");
+            isGameStarted = false;
             OnEndGame.Invoke();
         }
     }
