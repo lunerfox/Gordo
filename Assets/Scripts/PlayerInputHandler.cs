@@ -21,7 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
     private float horizontalAxis;
     private float verticalAxis;
 
-    private bool AxisSetupComplete;
+    public bool AxisSetupComplete = false;
 
     private GameController game;
 
@@ -36,13 +36,13 @@ public class PlayerInputHandler : MonoBehaviour
         //Since it's possible for the player to switch freely between AI and TouchControl, we should
         //create an AI just in case.
         AI = this.gameObject.AddComponent<AIManager>();
-        AI.InitAI(8.0f);
+        AI.InitAI(4.0f);
 
         UpdatePlayerMode();
 
     }
 
-    public void UpdatePlayerMode()
+    private void UpdatePlayerMode()
     {
         switch (player)
         {
@@ -73,8 +73,8 @@ public class PlayerInputHandler : MonoBehaviour
         {
             Debug.Log(this.gameObject.name + " is Human.");
             inputMethod = 0;
-            SetupTouchControls(player);
-            
+            if (!AxisSetupComplete) SetupTouchControls(player);
+
         }
         else
         {
@@ -105,7 +105,7 @@ public class PlayerInputHandler : MonoBehaviour
         if(game.isGameStarted && prepareControlUpdate)
         {
             Debug.Log("Setting up player handler for " + this.gameObject.name);
-            UpdatePlayerMode();
+            //UpdatePlayerMode();
             prepareControlUpdate = false;
         }
 
@@ -123,7 +123,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             horizontalAxisName = "Horizontal" + playerNum.ToString();
             verticalAxisName = "Vertical" + playerNum.ToString();
-            //Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
+            Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
             AxisSetupComplete = true;
         }
     }

@@ -133,6 +133,7 @@ public class GameController : MonoBehaviour {
         if(count == 1)
         {
             winningPlayer = winningBug.playerFriendlyName;
+            winningBug.DisableBug();
             Debug.Log("Waaahoo! " + winningPlayer + " is the winner!");
             isGameStarted = false;
             OnEndGame.Invoke();

@@ -51,12 +51,6 @@ public class BugController : MonoBehaviour {
     }
 
 
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
     void FixedUpdate ()
     {
         rb.AddForce(input.getForceVector()*currentStrength);
@@ -103,11 +97,8 @@ public class BugController : MonoBehaviour {
         else if(collision.gameObject.CompareTag("Destroyer"))
         {
             Debug.Log("Bug " + this.gameObject.name + " has fallen!");
-            isFallen = true;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            DisableBug();
             OnFallen.Invoke();
-            this.gameObject.SetActive(false);
         }
     }
 
@@ -125,17 +116,20 @@ public class BugController : MonoBehaviour {
         //Disable collisions for some time. This will prevent the bugs swapping momentum twice.
         _collisionDisableTime = collisionDisableTime;
     }
+    
+
 
     void UpdateGordoLevel(int amt)
     {
-        //Debug.Log("Bug is now at gordo level " + GordoLevel);
         GordoLevel += amt;
+        
         if (GordoLevel < 0) GordoLevel = 0;
         if (GordoLevel > 4) GordoLevel = 4;
-        
+        Debug.Log("Bug is now at gordo level " + GordoLevel);
+
         //In general, as the bug gets more massive, they're harder to control.
         //This serves to make the game more difficult as times goes on.
-        switch(GordoLevel)
+        switch (GordoLevel)
         {
             case 0:
                 SetupBugParams(2.0f, 4.0f, 0.5f, 1.0f);
@@ -155,6 +149,7 @@ public class BugController : MonoBehaviour {
                 OnGordoModeStart.Invoke();
                 break;
             default:
+                SetupBugParams(2.0f, 4.0f, 0.5f, 1.0f);
                 break;
         }
     }
@@ -167,6 +162,15 @@ public class BugController : MonoBehaviour {
         rb.mass = mass;
         rb.drag = drag;
         
+    }
+
+    public void DisableBug()
+    {
+        isFallen = true;
+        UpdateGordoLevel(-4);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        this.gameObject.SetActive(false);
     }
 
     public void ResetBug()
