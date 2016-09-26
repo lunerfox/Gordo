@@ -28,6 +28,9 @@ public class AIManager : MonoBehaviour {
 
         //Debug.Log("Found " + enemyBugs.Length + " other Bugs");
         targetBug = PickTarget();
+
+        meatSpawner = FindObjectOfType<MeatSpawner>();
+        if (!meatSpawner) Debug.LogError("AI Manager cannot find meat spawner");
     }
 
     public void InitAI(float timeBetweenStrat)
