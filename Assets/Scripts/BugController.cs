@@ -12,8 +12,12 @@ public class BugController : MonoBehaviour {
 
     public UnityEvent OnFeeding;
     public UnityEvent OnCollision;
+    public UnityEvent OnGordoModeStart;
+    public UnityEvent OnGordoModeEnd; 
     public UnityEvent OnFallen;
     public UnityEvent OnDefeat;
+
+    public string playerFriendlyName = "";
 
     public float bugRollStrength = 4.0f;
     private float currentStrength;
@@ -24,16 +28,37 @@ public class BugController : MonoBehaviour {
     private PlayerInputHandler input;
 
     private int GordoLevel = 0;
+    private float GordoTimeout = 0;
     private float collisionDisableTime = 0.15f;
     private float _collisionDisableTime = 0;
 
+    private GameController game;
+
 	// Use this for initialization
 	void Start () {
+
+        game = FindObjectOfType<GameController>();
+
         rb = GetComponent<Rigidbody>();
         if (!rb) Debug.LogError("Failed to find Rigid Body on " + this.gameObject.name);
 
         input = GetComponent<PlayerInputHandler>();
         if (!input) Debug.LogError("Failed to find player input handler on " + this.gameObject.name);
+
+        //If no name is given to the player, then give them a random name.
+        if(playerFriendlyName == "")
+        {
+            if (input.inputMethod == 1)
+            {
+                playerFriendlyName = Utils.getRandomName();
+            }
+            else
+            {
+                //Just for this build, we'll specify a very special player name.
+                playerFriendlyName = "codeSpark employee #" + Random.Range(1, 999).ToString();
+            }
+        }
+            
 
         UpdateGordoLevel(0); //Sets up the parameters of the bug.
     }
@@ -47,6 +72,16 @@ public class BugController : MonoBehaviour {
     {
         rb.AddForce(input.getForceVector()*currentStrength);
         _collisionDisableTime -= Time.deltaTime;
+
+        if(GordoLevel == 4)
+        {
+            GordoTimeout -= Time.deltaTime;
+            if(GordoTimeout < 0)
+            {
+                UpdateGordoLevel(-2);
+                OnGordoModeEnd.Invoke();
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -79,9 +114,9 @@ public class BugController : MonoBehaviour {
         else if(collision.gameObject.CompareTag("Destroyer"))
         {
             Debug.Log("Bug " + this.gameObject.name + " has fallen!");
-            OnFallen.Invoke();
             isFallen = true;
-            Destroy(this.gameObject, 3.0f);
+            OnFallen.Invoke();
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -102,11 +137,11 @@ public class BugController : MonoBehaviour {
 
     void UpdateGordoLevel(int amt)
     {
-        //Debug.Log("Bug is now at gordo level " + GordoLevel);
+        Debug.Log("Bug is now at gordo level " + GordoLevel);
         GordoLevel += amt;
         if (GordoLevel < 0) GordoLevel = 0;
         if (GordoLevel > 4) GordoLevel = 4;
-
+        
         //In general, as the bug gets more massive, they're harder to control.
         //This serves to make the game more difficult as times goes on.
         switch(GordoLevel)
@@ -124,9 +159,10 @@ public class BugController : MonoBehaviour {
                 SetupBugParams(8.0f, 16.0f, 0.2f, 1.5f);
                 break;
             case 4:
-                SetupBugParams(8.0f, 16.0f, 0.2f, 1.55f);
+                SetupBugParams(8.0f, 64.0f, 0.2f, 1.55f);
+                GordoTimeout = game.GordoModeTime;
+                OnGordoModeStart.Invoke();
                 break;
-
             default:
                 break;
         }
@@ -134,10 +170,23 @@ public class BugController : MonoBehaviour {
 
     void SetupBugParams(float mass, float strength, float drag, float scale)
     {
+        //Debug.Log("Bug now has mass " + mass + ", strength " + strength + ", drag " + drag);
         this.transform.localScale = new Vector3(scale, scale, scale);
         currentStrength = bugRollStrength * strength;
         rb.mass = mass;
         rb.drag = drag;
-        //Debug.Log("Bug now has mass " + mass + ", strength " + strength + ", drag" + drag);
+        
     }
+
+    public void ResetBug()
+    {
+        isFallen = false;
+        //UpdateGordoLevel(-4);
+    }
+
+    public void updateInputMode()
+    {
+        input.toggleMode(game);
+    }
+
 }
