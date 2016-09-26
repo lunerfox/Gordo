@@ -8,54 +8,78 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-
-    public enum InputMethod { touchJoystick, AI };
-    public InputMethod inputMethod;
+    //0 for human, 1 for AI, controlled by GameController.
+    public int inputMethod;
 
     public enum Players { player1, player2, player3, player4 };
     public Players player;
     public AIManager AI;
-
+    
     private string horizontalAxisName;
     private string verticalAxisName;
 
     private float horizontalAxis;
     private float verticalAxis;
-        
+
+    private bool AxisSetupComplete;
+
+    private GameController game;
+
+    private bool prepareControlUpdate = true;    
+
     // Use this for initialization
     void Start()
     {
-        if (inputMethod == InputMethod.touchJoystick)
+        //We look to the game controller as the authority of who is AI and who is human.
+        game = FindObjectOfType<GameController>();
+
+        //Since it's possible for the player to switch freely between AI and TouchControl, we should
+        //create an AI just in case.
+        AI = this.gameObject.AddComponent<AIManager>();
+        AI.InitAI(8.0f);
+
+        UpdatePlayerMode();
+
+    }
+
+    public void UpdatePlayerMode()
+    {
+        switch (player)
         {
-            switch (player)
-            {
-                case Players.player1:
-                    SetupTouchControls(1);
-                    break;
+            case Players.player1:
+                setPlayerMode(game.isPlayer1Human, 1);
+                break;
 
-                case Players.player2:
-                    SetupTouchControls(2);
-                    break;
+            case Players.player2:
+                setPlayerMode(game.isPlayer2Human, 2);
+                break;
 
-                case Players.player3:
-                    SetupTouchControls(3);
-                    break;
+            case Players.player3:
+                setPlayerMode(game.isPlayer3Human, 3);
+                break;
 
-                case Players.player4:
-                    SetupTouchControls(4);
-                    break;
+            case Players.player4:
+                setPlayerMode(game.isPlayer4Human, 4);
+                break;
 
-                default:
-                    break;
-            }
+            default:
+                break;
         }
-        else if (inputMethod == InputMethod.AI)
+    }
+
+    void setPlayerMode(bool isHuman, int player)
+    {
+        if(isHuman)
         {
-            //This Player is AI controlled. Create an AI component
-            AI = this.gameObject.AddComponent<AIManager>();
-            AI.InitAI(10.0f);
+            Debug.Log(this.gameObject.name + " is Human.");
+            SetupTouchControls(player);
+            inputMethod = 0;
         }
-
+        else
+        {
+            Debug.Log(this.gameObject.name + " is AI.");
+            inputMethod = 1;
+        }
     }
 
     // Update is called once per frame
@@ -63,34 +87,53 @@ public class PlayerInputHandler : MonoBehaviour
     {
         switch(inputMethod)
         {
-            case InputMethod.touchJoystick:
+            //Joystick
+            case 0:
                 horizontalAxis = CrossPlatformInputManager.GetAxis(horizontalAxisName);
                 verticalAxis = CrossPlatformInputManager.GetAxis(verticalAxisName);
                 break;
 
-            case InputMethod.AI:
+            //AI
+            case 1:
                 break;
 
             default:
                 break;                
         }
         
+        if(game.isGameStarted && prepareControlUpdate)
+        {
+            Debug.Log("Setting up player handler for " + this.gameObject.name);
+            UpdatePlayerMode();
+            prepareControlUpdate = false;
+        }
+
+        if(!prepareControlUpdate && !game.isGameStarted)
+        {
+            Debug.Log("Control Update now ready for " + this.gameObject.name);
+            prepareControlUpdate = true;
+        }
+
     }
 
     void SetupTouchControls(int playerNum)
     {
-        horizontalAxisName = "Horizontal" + playerNum.ToString();
-        verticalAxisName = "Vertical" + playerNum.ToString();
-        //Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
+        if(!AxisSetupComplete)
+        {
+            horizontalAxisName = "Horizontal" + playerNum.ToString();
+            verticalAxisName = "Vertical" + playerNum.ToString();
+            //Debug.Log("Player " + playerNum + " input configured - " + horizontalAxisName + ", " + verticalAxisName);
+            AxisSetupComplete = true;
+        }
     }
 
     public Vector3 getForceVector()
     {
-        if(inputMethod == InputMethod.touchJoystick )
+        if(inputMethod == 0 )
         {
             return new Vector3(horizontalAxis, 0.0f, verticalAxis);
         }
-        else if(inputMethod == InputMethod.AI)
+        else if(inputMethod == 1)
         {
             return AI.Calculate();
         }
@@ -99,6 +142,58 @@ public class PlayerInputHandler : MonoBehaviour
             return new Vector3(0, 0.0f, 0);
         }
             
+    }
+
+    //Switches between AI or Joystick mode.
+    public void toggleMode(GameController game)
+    {
+        Debug.Log("Toggling Mode");
+        //If the input method is Joystick, switch and vice versa.
+        switch(player)
+        {
+            case Players.player1:
+                setInputMethod(game.isPlayer1Human);
+                break;
+            case Players.player2:
+                setInputMethod(game.isPlayer2Human);
+                break;
+            case Players.player3:
+                setInputMethod(game.isPlayer3Human);
+                break;
+            case Players.player4:
+                setInputMethod(game.isPlayer4Human);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    void setInputMethod(bool isHuman)
+    {
+        if (isHuman) inputMethod = 0;
+        else inputMethod = 1;
+    }
+
+    public int getPlayer()
+    {
+        switch (player)
+        {
+            case Players.player1:
+                return 1;
+
+            case Players.player2:
+                return 2;
+
+            case Players.player3:
+                return 3;
+
+            case Players.player4:
+                return 4;
+
+            default:
+                return 0;
+        }
     }
 
 }

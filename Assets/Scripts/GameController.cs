@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour {
 
     public void CheckForWinner()
     {
-        Debug.Log("Checking for winner");
+        //Debug.Log("Checking for winner");
         int count = 0;
         BugController winningBug = null;
         //Count the number of bugs that hasn't fallen. If only one hasn't, then they've won!
@@ -127,7 +127,7 @@ public class GameController : MonoBehaviour {
             }
         }
 
-        Debug.Log(count + " bug(s) remaining.");
+        //Debug.Log(count + " bug(s) remaining.");
 
         //One and only one bug must be left.
         if(count == 1)

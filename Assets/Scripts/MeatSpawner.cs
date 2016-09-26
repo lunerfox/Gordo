@@ -41,7 +41,7 @@ public class MeatSpawner : MonoBehaviour {
     {
         //Instantiates new meat cube. 
         //This object is expected to be a physics object, so we can toss it.
-        Debug.Log("Spawning new Meat");
+        //Debug.Log("Spawning new Meat");
         GameObject freshMeat = Instantiate(meatCube);
         freshMeat.transform.position = this.gameObject.transform.position;
         freshMeat.transform.parent = this.gameObject.transform;
@@ -66,5 +66,20 @@ public class MeatSpawner : MonoBehaviour {
         var launchForce = new Vector3(forceX, forceY, forceZ);
         //Debug.Log("Launch force is " + launchForce);
         return launchForce;
+    }
+
+    //Counts the amount of meat available to the game.
+    public int meatCount()
+    {
+        var meatcubes = GetComponentsInChildren<Rigidbody>();
+        return meatcubes.Length;
+    }
+
+    //Randomly picks an available meat piece and gives the reference to it.
+    public GameObject provideMeat()
+    {
+        var meatcubes = GetComponentsInChildren<Rigidbody>();
+        int index = Random.Range(0, meatcubes.Length);
+        return meatcubes[index].gameObject;
     }
 }

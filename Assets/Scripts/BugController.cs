@@ -128,7 +128,7 @@ public class BugController : MonoBehaviour {
 
     void UpdateGordoLevel(int amt)
     {
-        Debug.Log("Bug is now at gordo level " + GordoLevel);
+        //Debug.Log("Bug is now at gordo level " + GordoLevel);
         GordoLevel += amt;
         if (GordoLevel < 0) GordoLevel = 0;
         if (GordoLevel > 4) GordoLevel = 4;
