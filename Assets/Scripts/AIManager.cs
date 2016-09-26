@@ -15,16 +15,18 @@ public class AIManager : MonoBehaviour {
     private BugController [] enemyBugs;
     private float timeBetweenStrategies;
 
+    private MeatSpawner meatSpawner;
+
     // Use this for initialization
     void Start() {
         
-        Debug.Log("Initializing AI for " + this.gameObject.name);
+        //Debug.Log("Initializing AI for " + this.gameObject.name);
         bug = GetComponent<BugController>();
         enemyBugs = FindObjectsOfType<BugController>();
 
         enemyBugs = enemyBugs.Where(val => val != bug).ToArray();
 
-        Debug.Log("Found " + enemyBugs.Length + " other Bugs");
+        //Debug.Log("Found " + enemyBugs.Length + " other Bugs");
         targetBug = PickTarget();
     }
 

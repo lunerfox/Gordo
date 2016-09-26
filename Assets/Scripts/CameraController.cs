@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
     {
         game = FindObjectOfType<GameController>();
 
-        Debug.Log("Found " + locations.Length + " places");
+        //Debug.Log("Found " + locations.Length + " places");
         sj = GetComponent<SpringJoint>();
         if (!sj) Debug.LogWarning("Spring Joint not found in " + this.gameObject.name);
         else
