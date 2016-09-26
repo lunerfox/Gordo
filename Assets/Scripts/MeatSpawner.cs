@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 //Spawns Meat Cubes, ejecting the powerup randomly with some force.
 
@@ -7,6 +8,8 @@ using System.Collections;
 //Filled with delicious, meaty veggies.
 
 public class MeatSpawner : MonoBehaviour {
+
+    public UnityEvent OnSpawnMeat;
 
     [Header("Timing parameters")]
     public float minTimeBetweenSpawn = 10.0f;
@@ -41,16 +44,18 @@ public class MeatSpawner : MonoBehaviour {
         Debug.Log("Spawning new Meat");
         GameObject freshMeat = Instantiate(meatCube);
         freshMeat.transform.position = this.gameObject.transform.position;
+        freshMeat.transform.parent = this.gameObject.transform;
         var rb = freshMeat.GetComponent<Rigidbody>();
         rb.AddForce(randomLaunchForce());
         rb.AddTorque(randomLaunchForce());
         setupSpawnTimer();
+        OnSpawnMeat.Invoke();
     }
 
     void setupSpawnTimer()
     {
         _timeToSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
-        Debug.Log("Time to next cube is " + _timeToSpawn);
+        //Debug.Log("Time to next cube is " + _timeToSpawn);
     }
 
     public Vector3 randomLaunchForce()
