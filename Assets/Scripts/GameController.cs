@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour {
         //Set the player mode UI to it's default state.
         foreach (var playerModeUI in playerModeUIs)
         {
-            playerModeUI.changeMode();
+            playerModeUI.changeMode(this);
         }
     }
 

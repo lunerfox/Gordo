@@ -16,13 +16,12 @@ public class PlayerModeDisplay : MonoBehaviour {
 
     void Start()
     {
-        game = FindObjectOfType<GameController>();
-        text = GetComponent<Text>();
+        
     }
 
-    public void changeMode()
+    public void changeMode(GameController game)
     {
-        switch(player)
+        switch (player)
         {
             case Players.player1:
                 setString(game.isPlayer1Human);
@@ -43,6 +42,7 @@ public class PlayerModeDisplay : MonoBehaviour {
 
     void setString(bool isHuman)
     {
+        text = GetComponent<Text>();
         if (isHuman) text.text = humanString;
         else text.text = robotString;
     }

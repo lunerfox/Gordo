@@ -72,13 +72,14 @@ public class PlayerInputHandler : MonoBehaviour
         if(isHuman)
         {
             Debug.Log(this.gameObject.name + " is Human.");
-            SetupTouchControls(player);
             inputMethod = 0;
+            SetupTouchControls(player);
+            
         }
         else
         {
-            Debug.Log(this.gameObject.name + " is AI.");
             inputMethod = 1;
+            Debug.Log(this.gameObject.name + " is AI.");
         }
     }
 

@@ -43,7 +43,16 @@ public class MobileJoystickUIHandler : MonoBehaviour {
 
     void setUI(bool switchOn)
     {
-        joystick.enabled = switchOn;
-        image.enabled = switchOn;
+        if(game.isGameStarted)
+        {
+            joystick.enabled = switchOn;
+            image.enabled = switchOn;
+        }
+        else
+        {
+            joystick.enabled = false;
+            image.enabled = false;
+        }
+        
     }
 }
