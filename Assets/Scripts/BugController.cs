@@ -127,6 +127,8 @@ public class BugController : MonoBehaviour {
         if (GordoLevel > 4) GordoLevel = 4;
         Debug.Log("Bug is now at gordo level " + GordoLevel);
 
+        if(GordoLevel < 4) OnGordoModeEnd.Invoke();
+
         //In general, as the bug gets more massive, they're harder to control.
         //This serves to make the game more difficult as times goes on.
         switch (GordoLevel)
